@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Live Search</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h2>Simple Live Search in PHP</h2>
+    <input type="text" id="search" placeholder="Search..." autocomplete="off">
+    <div id="result"></div>
+
+    <script>
+        $(document).ready(function(){
+            $("#search").keyup(function(){
+                var searchText = $("#search").val();
+                if (searchText !== "") {
+                    $.ajax({
+                        url: "insert.php",
+                        method: "POST",
+                        data: {query: searchText},
+                        success: function(response) {
+                            $("#result").html(response);
+                        }
+                    });
+                } else {
+                    $("#result").html("");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
